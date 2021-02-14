@@ -127,16 +127,6 @@ const SiteLogo = styled.h1`
     font-size: 24px;
   }
 `;
-const Overlay = styled.div`
-  background-color: rgba(51, 51, 51, 0.55);
-  width: 100vw;
-  z-index: -10;
-  height: 100vh;
-  position: fixed;
-  left: 0vw;
-  overflow-x: hidden;
-  top: 0;
-`;
 
 const HamButton = styled.button`
   position: absolute;
@@ -209,11 +199,7 @@ export default class Banner extends Component<Props, State> {
               <NavLink to="/">jayash.xyz</NavLink>
             </SiteLogo>
           )}
-          {!this.state.showHamburger ? (
-            <Overlay onClick={this.toggleHamburger}></Overlay>
-          ) : null}
         </MobilePages>
-
         <DesktopPages>
           <ul>
             <li>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { RouteComponentProps } from "react-router";
 import styled from "styled-components";
-import marked from "marked";
+
 import ReactMarkdown from "react-markdown";
 import { motion } from "framer-motion";
 interface State {}
@@ -72,7 +72,7 @@ export default class Posts extends Component<
           </StyledPost>
         </div>
       );
-    }
+    } else return null;
   });
 
   render() {

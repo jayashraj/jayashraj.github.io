@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+
 import styled from "styled-components";
 
 interface State {}
@@ -95,7 +95,6 @@ const Heading = styled.div`
     color: #555555;
   }
 `;
-const Description = styled.div``;
 
 export default class Projects extends Component<Props, State> {
   state = {};
@@ -110,7 +109,7 @@ export default class Projects extends Component<Props, State> {
           <StyledContainer>
             <StyledBox>
               <div>
-                <a href="#">
+                <a href="https://jayash.xyz/todo/">
                   <img
                     className="project-image"
                     src="../images/todolist.png"
@@ -125,7 +124,7 @@ export default class Projects extends Component<Props, State> {
             </StyledBox>
             <StyledBox>
               <div>
-                <a href="#">
+                <a href="https://jayash.xyz/calculator/">
                   <img
                     className="project-image"
                     src="../images/calculator.png"
@@ -137,7 +136,7 @@ export default class Projects extends Component<Props, State> {
             </StyledBox>
             <StyledBox>
               <div>
-                <a href="#">
+                <a href="https://jayash.xyz/pomodoro">
                   <img
                     className="project-image"
                     src="../images/pomodoro.png"
@@ -150,7 +149,7 @@ export default class Projects extends Component<Props, State> {
 
             <StyledBox>
               <div>
-                <a href="#">
+                <a href="https://jayash.xyz/drums/">
                   <img
                     className="project-image"
                     src="../images/drums.png"
