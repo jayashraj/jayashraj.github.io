@@ -86,9 +86,6 @@ export default class About extends Component<Props, State> {
     return (
       <div style={{ flex: 1 }}>
         <StyledPage>
-          <Heading>
-            <h1>{this.props.data.title}</h1>
-          </Heading>
           <MobileView>
             <UserInfo>
               <div>
@@ -100,6 +97,9 @@ export default class About extends Component<Props, State> {
             <p>{this.props.data.content}</p>
           </MobileView>
           <DesktopView>
+            <Heading>
+              <h1>{this.props.data.title}</h1>
+            </Heading>
             <p>{this.props.data.content}</p>
           </DesktopView>
         </StyledPage>
