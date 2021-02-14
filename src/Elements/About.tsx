@@ -9,6 +9,12 @@ interface Props {
     date: string;
     content: string;
   };
+  profile: {
+    name: string;
+    bio: string;
+    coverImage: string;
+    userImage: string;
+  };
 }
 interface State {}
 
@@ -30,8 +36,49 @@ const Heading = styled.div`
   p {
     color: #555555;
   }
+  @media all and (max-width: 768px) {
+    text-align: center;
+  }
 `;
 
+const MobileView = styled.div`
+  display: none;
+  @media all and (max-width: 768px) {
+    display: block;
+  }
+`;
+const DesktopView = styled.div`
+  display: none;
+  @media all and (min-width: 768px) {
+    display: block;
+  }
+`;
+
+const UserInfo = styled.div`
+  width: 50%;
+  height: 100%;
+  display: inline;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fafaff;
+    padding: 20px;
+    height: 100%;
+
+    a {
+      text-decoration: none;
+    }
+    h2 {
+      color: #d81e5b;
+    }
+  }
+  img {
+    width: 150px;
+    height: auto;
+  }
+`;
 export default class About extends Component<Props, State> {
   state = {};
 
@@ -42,7 +89,19 @@ export default class About extends Component<Props, State> {
           <Heading>
             <h1>{this.props.data.title}</h1>
           </Heading>
-          <p>{this.props.data.content}</p>
+          <MobileView>
+            <UserInfo>
+              <div>
+                <img src={this.props.profile.userImage} alt="" />
+                <h2>{this.props.profile.name}</h2>
+              </div>
+            </UserInfo>
+
+            <p>{this.props.data.content}</p>
+          </MobileView>
+          <DesktopView>
+            <p>{this.props.data.content}</p>
+          </DesktopView>
         </StyledPage>
       </div>
     );

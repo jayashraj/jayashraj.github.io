@@ -15,9 +15,12 @@ interface State {}
 
 const Container = styled.div`
   width: 80vw;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  @media all and (max-width: 480px) {
+    width: 90vw;
+  }
 `;
 
 const userData = {
@@ -92,7 +95,9 @@ export default class Home extends Component<Props, State> {
               />
               <Route
                 path="/about"
-                render={(props) => <About {...props} data={aboutPage} />}
+                render={(props) => (
+                  <About {...props} profile={userData} data={aboutPage} />
+                )}
               />
               <Route
                 path="/archive"

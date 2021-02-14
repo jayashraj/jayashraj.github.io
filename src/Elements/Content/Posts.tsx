@@ -3,6 +3,7 @@ import { RouteComponentProps } from "react-router";
 import styled from "styled-components";
 import marked from "marked";
 import ReactMarkdown from "react-markdown";
+import { motion } from "framer-motion";
 interface State {}
 // {(this.props.location.state as PostState).content}
 const StyledPost = styled.div`
@@ -61,7 +62,7 @@ export default class Posts extends Component<
 
     if (id === path[path.length - 1]) {
       return (
-        <div style={{ flex: 1 }}>
+        <div key={id} style={{ flex: 1 }}>
           <StyledPost>
             <Heading>
               <h1>{title}</h1>
@@ -77,7 +78,12 @@ export default class Posts extends Component<
   render() {
     if (this.props.location.state as PostState) {
       return (
-        <div style={{ flex: 1 }}>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          style={{ flex: 1 }}
+        >
           <StyledPost>
             <Heading>
               <h1>{(this.props.location.state as PostState).title}</h1>
@@ -91,7 +97,7 @@ export default class Posts extends Component<
               children={(this.props.location.state as PostState).content}
             ></ReactMarkdown>
           </StyledPost>
-        </div>
+        </motion.div>
       );
     } else {
       return <div style={{ flex: 1 }}>{this.directPost}</div>;

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
@@ -13,7 +13,7 @@ interface ActivityProps {
 }
 interface State {}
 
-const StyledPost = styled.div`
+const StyledPost = styled(motion.div)`
   background-color: #fafaff;
   margin: 10px 0 10px 0;
 
@@ -58,7 +58,11 @@ class Post extends Component<PostProps, State> {
 
   render() {
     return (
-      <StyledPost>
+      <StyledPost
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
         <Link
           to={{
             pathname: `/posts/${this.props.data.id}`,

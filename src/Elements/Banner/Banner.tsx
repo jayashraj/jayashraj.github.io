@@ -38,6 +38,7 @@ const UserInfo = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
     background-color: #fafaff;
     padding: 20px;
     height: 100%;
@@ -55,7 +56,7 @@ const UserInfo = styled.div`
   }
 `;
 
-const Pages = styled.div`
+const DesktopPages = styled.div`
   background-color: #2b303a;
   color: white;
   padding: 10px;
@@ -78,6 +79,35 @@ const Pages = styled.div`
     }
   }
   @media all and (max-width: 650px) {
+    display: none;
+  }
+`;
+
+const MobilePages = styled.div`
+  background-color: #2b303a;
+  color: white;
+  z-index: 2;
+  padding: 10px;
+  position: relative;
+  min-height: 78px;
+  a {
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
+  }
+  a:hover {
+    color: #d81e5b;
+  }
+  ul {
+    display: flex;
+    li {
+      display: block;
+      padding: 10px;
+      margin: 0 10px 0 10px;
+      list-style: none;
+    }
+  }
+  @media all and (max-width: 650px) {
     ul {
       display: flex;
       flex-direction: column;
@@ -85,6 +115,9 @@ const Pages = styled.div`
   }
   @media all and (max-width: 480px) {
     height: 100%;
+  }
+  @media all and (min-width: 650px) {
+    display: none;
   }
 `;
 const SiteLogo = styled.h1`
@@ -94,6 +127,17 @@ const SiteLogo = styled.h1`
     font-size: 24px;
   }
 `;
+const Overlay = styled.div`
+  background-color: rgba(51, 51, 51, 0.55);
+  width: 100vw;
+  z-index: -10;
+  height: 100vh;
+  position: fixed;
+  left: 0vw;
+  overflow-x: hidden;
+  top: 0;
+`;
+
 const HamButton = styled.button`
   position: absolute;
   right: 10px;
@@ -101,6 +145,7 @@ const HamButton = styled.button`
   color: #fafaff;
   border: none;
   background-color: #2b303a;
+  border: solid 1px #fafaff;
 
   &:hover {
     color: #d81e5b;
@@ -121,9 +166,7 @@ export default class Banner extends Component<Props, State> {
     showHamburger: false,
   };
   toggleHamburger = () => {
-    this.setState({ showHamburger: !this.state.showHamburger }, () => {
-      console.log("Hamburger toggled, it is now", this.state.showHamburger);
-    });
+    this.setState({ showHamburger: !this.state.showHamburger }, () => {});
   };
 
   render() {
@@ -143,7 +186,7 @@ export default class Banner extends Component<Props, State> {
           </UserInfo>
         </BannerContainer>
 
-        <Pages>
+        <MobilePages>
           <HamButton id="hamburger" onClick={this.toggleHamburger}>
             {!this.state.showHamburger ? <h1>&#10005;</h1> : <h1>&#9776;</h1>}
           </HamButton>
@@ -152,10 +195,10 @@ export default class Banner extends Component<Props, State> {
               <NavLink to="/">Home</NavLink>
             </li>
             <li>
-              <NavLink to="/projects">Projects</NavLink>
+              <NavLink to="/archive">Archive</NavLink>
             </li>
             <li>
-              <NavLink to="/archive">Archive</NavLink>
+              <NavLink to="/projects">Projects</NavLink>
             </li>
             <li>
               <NavLink to="/about">About</NavLink>
@@ -163,10 +206,30 @@ export default class Banner extends Component<Props, State> {
           </ul>
           {!this.state.showHamburger ? null : (
             <SiteLogo>
-              <NavLink to="/">Jayash.xyz</NavLink>
+              <NavLink to="/">jayash.xyz</NavLink>
             </SiteLogo>
           )}
-        </Pages>
+          {!this.state.showHamburger ? (
+            <Overlay onClick={this.toggleHamburger}></Overlay>
+          ) : null}
+        </MobilePages>
+
+        <DesktopPages>
+          <ul>
+            <li>
+              <NavLink to="/">Home</NavLink>
+            </li>
+            <li>
+              <NavLink to="/archive">Archive</NavLink>
+            </li>
+            <li>
+              <NavLink to="/projects">Projects</NavLink>
+            </li>
+            <li>
+              <NavLink to="/about">About</NavLink>
+            </li>
+          </ul>
+        </DesktopPages>
       </div>
     );
   }
