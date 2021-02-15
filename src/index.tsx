@@ -1,9 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 
 import reportWebVitals from "./reportWebVitals";
-import Home from "./Home";
+import App from "./App";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -17,7 +16,7 @@ const Container = styled.div`
 ReactDOM.render(
   <React.StrictMode>
     <Container>
-      <Home />
+      <App />
     </Container>
   </React.StrictMode>,
   document.getElementById("root")
