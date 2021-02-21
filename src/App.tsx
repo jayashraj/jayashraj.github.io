@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Suspense } from "react";
 import Header from "./Components/Header";
 import Home from "./Components/Pages/Home";
 import About from "./Components/Pages/About";
@@ -45,6 +45,7 @@ export default class App extends Component<Props, State> {
     darkModeOn: false,
   };
   toggleDarkMode = () => {
+    console.log(this.state);
     this.setState({
       darkModeOn: !this.state.darkModeOn,
     });
@@ -53,43 +54,45 @@ export default class App extends Component<Props, State> {
     return (
       <ThemeProvider theme={this.state.darkModeOn ? darkTheme : lightTheme}>
         <GlobalStyle />
-        <Container>
-          <HashRouter basename={process.env.PUBLIC_URL}>
-            {/*for github pages, as it doesnt support client side routing apparently*/}
-            <Header
-              profile={user}
-              toggleDarkMode={this.toggleDarkMode}
-              darkModeOn={this.state.darkModeOn}
-            />
-            <AnimatePresence initial={false} exitBeforeEnter>
-              <Switch>
-                <Route
-                  exact
-                  path="/"
-                  render={(props) => <Home {...props} posts={posts} />}
-                />
-                <Route
-                  path="/about"
-                  render={(props) => (
-                    <About {...props} user={user} page={about} />
-                  )}
-                />
-                <Route
-                  path="/archive"
-                  render={(props) => <Archive {...props} posts={posts} />}
-                />
-                <Route path="/projects" component={Projects} />
-                <Route
-                  path="/posts/:post_id"
-                  render={(props) => <Posts {...props} posts={posts} />}
-                  //may seem confusing but for posts components pass posts array as posts props
-                />
-              </Switch>
-            </AnimatePresence>
-          </HashRouter>
+        <Suspense fallback={<p>Loading ...</p>}>
+          <Container>
+            <HashRouter basename={process.env.PUBLIC_URL}>
+              {/*for github pages, as it doesnt support client side routing apparently*/}
+              <Header
+                profile={user}
+                toggleDarkMode={this.toggleDarkMode}
+                darkModeOn={this.state.darkModeOn}
+              />
+              <AnimatePresence initial={false} exitBeforeEnter>
+                <Switch>
+                  <Route
+                    exact
+                    path="/"
+                    render={(props) => <Home {...props} posts={posts} />}
+                  />
+                  <Route
+                    path="/about"
+                    render={(props) => (
+                      <About {...props} user={user} page={about} />
+                    )}
+                  />
+                  <Route
+                    path="/archive"
+                    render={(props) => <Archive {...props} posts={posts} />}
+                  />
+                  <Route path="/projects" component={Projects} />
+                  <Route
+                    path="/posts/:post_id"
+                    render={(props) => <Posts {...props} posts={posts} />}
+                    //may seem confusing but for posts components pass posts array as posts props
+                  />
+                </Switch>
+              </AnimatePresence>
+            </HashRouter>
 
-          <Footer />
-        </Container>
+            <Footer />
+          </Container>
+        </Suspense>
       </ThemeProvider>
     );
   }
