@@ -43,6 +43,9 @@ const StyledPost = styled(motion.div)`
     li::marker {
       color: ${(props) => `${props.theme.text}`};
     }
+    li {
+      color: ${(props) => `${props.theme.text}`};
+    }
   }
   a {
     color: ${(props) => `${props.theme.heading}`};
